@@ -1,0 +1,3 @@
+[submodule "MinhVHN/--recursive"]
+	path = MinhVHN/--recursive
+	url = git@github.com:adafruit/Adafruit_TCS34725.git
