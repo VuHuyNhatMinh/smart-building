@@ -1,12 +1,19 @@
 #include <Arduino.h>
 
-void setup() {
-  // put your setup code here, to run once:
+#include "MinhVHN.h"
+
+void setup(void) {
   Serial.begin(9600);
+
+  if (tcs.begin()) {
+    Serial.println("Found sensor");
+  } else {
+    Serial.println("No TCS34725 found ... check your connections");
+    while (1);
+  }
+
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-  Serial.println("Hello World!");
-  delay(1000);
+void loop(void) {
+  readTCS();
 }
