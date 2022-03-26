@@ -1,33 +1,39 @@
-/*******************************************************
-*   Author: Vu Huy Nhat Minh 20191973
-*******************************************************/
-#ifndef _MINH_VHN_
-#define _MINH_VHN_
+/*!
+ *  @file MinhVHN.h
+ *
+ *  @section introduction 
+ * 
+ *  @section author
+ *  
+ *  Vu Huy Nhat Minh 20191973
+ * 
+ *  @section library: 
+ * 
+ *  Sensor: TCS34725
+ *  Vendor: Adafruit TCS 34725 
+ *  Github: https://github.com/adafruit/Adafruit_TCS34725
+ */
+#ifndef _MINHVHN_H_
+#define _MINHVHN_H_
 
 #include <Arduino.h>
 
 #include <SPI.h>
-#include <Wire.h>
 #include "Adafruit_TCS34725.h"
 
+/* Initialize tcs object for sensor */
 Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_614MS, TCS34725_GAIN_1X);
 
+/*!
+ *  @brief Read tcs sensor value and add to message
+ */
 void readTCS() 
 {
-    // uint16_t r, g, b, c, colorTemp, lux;
-
-    uint16_t r, g, b, c;
-    tcs.getRawData(&r, &g, &b, &c);
-    // colorTemp = tcs.calculateColorTemperature(r, g, b);
-    // colorTemp = tcs.calculateColorTemperature_dn40(r, g, b, c);
-    // lux = tcs.calculateLux(r, g, b);
-
-    // Serial.print("Color Temp: "); Serial.print(colorTemp, DEC); Serial.print(" K - ");
-    // Serial.print("Lux: "); Serial.print(lux, DEC); Serial.print(" - ");
-    Serial.print("R: "); Serial.print(r, DEC); Serial.print(" ");
-    Serial.print("G: "); Serial.print(g, DEC); Serial.print(" ");
-    Serial.print("B: "); Serial.print(b, DEC); Serial.print(" ");
-    // Serial.print("C: "); Serial.print(c, DEC); Serial.print(" ");
+    float r, g, b;
+    tcs.getRGB(&r, &g, &b);
+    Serial.print("Red: "); Serial.print(r); Serial.print(" ");
+    Serial.print("Green: "); Serial.print(g); Serial.print(" ");
+    Serial.print("Blue: "); Serial.print(b); Serial.print(" ");
     Serial.println(" ");
 }
 
