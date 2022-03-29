@@ -16,4 +16,5 @@ void setup(void) {
 
 void loop(void) {
   readTCS();
+  readMAX();
 }
