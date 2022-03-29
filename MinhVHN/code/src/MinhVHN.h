@@ -37,5 +37,11 @@ void readTCS()
     Serial.println(" ");
 }
 
+void readMAX()
+{
+    int sound = analogRead(PIN_PF0);
+    Serial.print("Sound: "); 
+    Serial.println(sound);
+}
 
 #endif
