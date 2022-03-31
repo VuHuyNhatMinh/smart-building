@@ -6,7 +6,7 @@
 
 
 
-void Read_Temp_Humid(SoftwareSerial UARTset)
+void Read_SHT21(SoftwareSerial UARTset)
 {
     SHT21 sht;    // SHT21 variable
 
