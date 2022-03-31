@@ -20,7 +20,7 @@ void setup()
   Serial.begin(9600);
 /* end part */
 
-/* set up for headerfile "Wire" */
+/* set up for I2C bus */
   Wire.begin();
 /* end part */ 
 
@@ -43,21 +43,21 @@ void loop()
 
     if (UART1.available() > 0) 
     {
-        UART1.print(ReadDustAndSendToESP());
+        UART1.print(ReadDust());
     }
     delay(500);
 
     
     if (UART1.available() > 0) 
     {
-        UART1.print(ReadMotionAndSendToESP());
+        UART1.print(ReadMotion());
     }
     delay(500);
     
     
     if (UART1.available() > 0) 
     {
-        UART1.print(ReadLightAndSendToESP());
+        UART1.print(ReadLight());
     }
     delay(500);
 

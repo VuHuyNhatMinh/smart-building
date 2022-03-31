@@ -1,3 +1,18 @@
+/*!
+ *  @section light sensor: 
+ * 
+ *  Sensor: BH1759FVI
+ *  Vendor:
+ *  Github:
+ */
+
+
+
+
+
+
+
+
 #ifndef _LIBRARY_H_
 #define _LIFRARY_H_
 
@@ -17,7 +32,7 @@ BH1750 lightMeter;
 
 
 
-String ReadLightAndSendToESP(void)
+String ReadLight(void)
 {
     float lux = lightMeter.readLightLevel();
     String data = "Light: ";
@@ -28,7 +43,7 @@ String ReadLightAndSendToESP(void)
 }
 
 
-String ReadDustAndSendToESP(void)
+String ReadDust(void)
 {
     int delay_time=280;
     int delay_time_2=40;
@@ -69,7 +84,7 @@ String ReadDustAndSendToESP(void)
 }
 
 
-String ReadMotionAndSendToESP(void)
+String ReadMotion(void)
 {
     int motion = digitalRead(PIN_PE7);
 
