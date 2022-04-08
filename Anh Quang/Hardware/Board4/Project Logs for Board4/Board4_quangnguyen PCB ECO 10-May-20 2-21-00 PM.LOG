@@ -1,0 +1,11 @@
+Removed Pin From Net: NetName=GND Pin=J1-3
+Removed Member From Class: ClassName=BOARD4_quangnguyen Member=J1
+Added Component: Designator=JDC(DC-IN)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Value"; Value = "Jac DC"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=JDC-2
+Added Pin To Net: NetName=NetJDC_1 Pin=JDC-1
+Added Pin To Net: NetName=NetJDC_1 Pin=SW6-3
+Added Net: Name=NetJDC_1
+Added Member To Class: ClassName=BOARD4_quangnguyen Member=Component D1 1N4007
+Added Member To Class: ClassName=BOARD4_quangnguyen Member=Component JDC Jac DC

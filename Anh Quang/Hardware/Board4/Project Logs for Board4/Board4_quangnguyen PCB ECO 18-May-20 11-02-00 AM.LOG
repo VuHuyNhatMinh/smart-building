@@ -1,0 +1,15 @@
+Removed Pin From Net: NetName=NetFuse_2 Pin=SW6-1
+Removed Pin From Net: NetName=NetD3_1 Pin=SW6-2
+Removed Pin From Net: NetName=NetFuse_2 Pin=SW6-3
+Removed Pin From Net: NetName=NetD3_1 Pin=SW6-4
+Removed Member From Class: ClassName=BOARD4_quangnguyen Member=SW6
+Change Component Comment : Designator=VIT2 Old Comment=1 New Comment=2
+Change Component Comment : Designator=VIT3 Old Comment=1 New Comment=3
+Change Component Comment : Designator=VIT4 Old Comment=1 New Comment=4
+Added Component: Designator=SW(SW-GAT)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Value"; Value = "Switch 4x2"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=NetFuse_2 Pin=SW-1
+Added Pin To Net: NetName=NetD3_1 Pin=SW-2
+Added Pin To Net: NetName=NetD3_1 Pin=SW-3
+Added Member To Class: ClassName=BOARD4_quangnguyen Member=Component SW Switch 3x2
