@@ -20,7 +20,8 @@ int t_Temp_Humid_event = 20000;
 int t_CO2_event = 21000;
 int t_RGB_event = 22000;
 int t_Light_event = 23000;
-int t_Motion_event = 24000;
+int t_Motion_event = 1000;
+int t_Read_Motion_event = 60000;
 int t_Dust_event = 25000;
 int t_Sound_event = 26000;
 
@@ -37,6 +38,7 @@ DS3231  rtc(SDA, SCL);
 /* Initialise with specific int time and gain values */
 Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_614MS, TCS34725_GAIN_1X);
 BH1750 lightMeter;
+int motion = 0, totalread = 0;
 
 
 void setup() {
@@ -56,14 +58,15 @@ void setup() {
 
   // set events
   int Temp_Humid_event = t.every(t_Temp_Humid_event, Read_Temp_Humid, (void*)0);
-  
+
   int CO2_event = t.every(t_CO2_event, Read_CO2, (void*)0);
 
   int RGB_event = t.every(t_RGB_event, Read_RGB, (void*)0);
 
   int Light_event = t.every(t_Light_event, Read_Light, (void*)0);
 
-  int Motion_event = t.every(t_Motion_event, Read_Motion, (void*)0);
+  int Motion_event = t.every(t_Motion_event, Motion, (void*)0);
+  int Read_Motion_event = t.every(t_Read_Motion_event, Read_Motion, (void*)0);
 
   int Dust_event = t.every(t_Dust_event, Read_Dust, (void*)0);
 
@@ -128,13 +131,25 @@ void Read_Light(void *context) {    // read data from BH1750
   UART1.print("Light: "); UART1.print(lightMeter.readLightLevel()); UART1.println(" ");
 }
 
+void Motion(void *context) {
+  if (digitalRead(PIN_PE7))
+    motion++;
+
+  totalread++;
+}
+
 void Read_Motion(void *context) {     // read data from HC - SR501 - PIR
 
   Real_time();
-  if (digitalRead(PIN_PE7))
-    UART1.println("Motion");
+
+  if ((float)motion / totalread >= 0.5) // nếu trong 1p có 30/60 lần đọc chuyển động thì báo là có chuyển động
+  { UART1.println("Motion");
+    motion = 0;
+    totalread = 0;
+  }
   else
-    UART1.println("Non motion");
+    UART1.println("Non Motion");
+
 }
 
 void Read_Dust(void *context) {   // read data from GP2Y DUST PM2.5
