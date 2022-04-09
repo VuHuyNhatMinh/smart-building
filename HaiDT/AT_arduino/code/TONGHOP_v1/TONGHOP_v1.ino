@@ -21,7 +21,7 @@ int t_CO2_event = 21000;
 int t_RGB_event = 22000;
 int t_Light_event = 23000;
 int t_Motion_event = 1000;
-int t_Read_Motion_event = 60000;
+int t_Read_Motion_event = 10000;
 int t_Dust_event = 25000;
 int t_Sound_event = 26000;
 
@@ -142,16 +142,22 @@ void Read_Motion(void *context) {     // read data from HC - SR501 - PIR
 
   Real_time();
 
-  if ((float)motion / totalread >= 0.5) // nếu trong 1p có 30/60 lần đọc chuyển động thì báo là có chuyển động
-  { UART1.println("Motion");
-    motion = 0;
-    totalread = 0;
+  if ((float)motion / totalread >= 0.5 || totalread >= 60) // nếu trong 1p có 30/60 lần đọc chuyển động thì báo là có chuyển động
+  { UART1.print("Motion  ");
+    UART1.print("motion  ");  UART1.print(motion);
+    UART1.print("   Totalread  ");  UART1.println(totalread);
+
   }
   else
-    UART1.println("Non Motion");
+  {
+    UART1.print("Non Motion");
+    UART1.print("   motion  ");  UART1.print(motion);
+    UART1.print("   Totalread  ");  UART1.println(totalread);
 
+  }
+  motion = 0;
+  totalread = 0;
 }
-
 void Read_Dust(void *context) {   // read data from GP2Y DUST PM2.5
 
 
