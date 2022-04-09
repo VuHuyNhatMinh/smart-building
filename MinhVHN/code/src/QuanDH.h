@@ -13,8 +13,8 @@
 
 
 
-#ifndef _LIBRARY_H_
-#define _LIFRARY_H_
+#ifndef _QUANDH_H_
+#define _QUANDH_H_
 
 
 
