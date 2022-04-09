@@ -37,11 +37,49 @@ void readTCS()
     Serial.println(" ");
 }
 
+/*!
+ * @brief Read MAX9814 sensor 
+ * 
+ */
+
 void readMAX()
 {
-    int sound = analogRead(PIN_PF0);
-    Serial.print("Sound: "); 
-    Serial.println(sound);
+    unsigned long startMillis= millis();  // Start of sample window
+    unsigned int signalMax = 0;
+    unsigned int signalMin = 1024;
+
+    // Collect data for 50 ms (Sufficient lowest frequency 20Hz = 50ms)
+    while (millis() - startMillis < 50)
+    {
+        unsigned int sample = analogRead(0);
+        // Toss out spurious readings
+        if (sample < 1024)  
+        {
+            if (sample > signalMax)
+            {
+                // save just the max levels
+                signalMax = sample;  
+            }
+            else if (sample < signalMin)
+            {
+                // save just the min levels
+                // if not the sample would compare with point zero only
+                signalMin = sample;  
+            }
+        }
+    }
+
+    // Peak-to-peak sound level/amplitude
+    unsigned int peakToPeak = signalMax - signalMin;  
+
+    // Convert to volts (0 - 3.3) (ADC 10 bit: 0 - 1023)
+    double volts = (peakToPeak * 3.3) / 1024; 
+
+    // Covert to decibel (approximately)
+    double db = 20*log10(volts/exp(-44*1.0/10));
+    Serial.print("Sound: ");
+    Serial.print(db);
+    Serial.println("db");
 }
 
 #endif
