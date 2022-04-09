@@ -29,9 +29,7 @@ void loop(void) {
     JsonObject obj = doc.to<JsonObject>();
     readTCS(obj);
     readMAX(obj);
-    serializeJson(obj, Serial);
+    readSHT(obj);
 
-    Read_CO2(UART3,UART1);
-    Read_Real_time(UART1);
-    Read_SHT21(UART1);
+    serializeJson(obj, Serial);
 }
