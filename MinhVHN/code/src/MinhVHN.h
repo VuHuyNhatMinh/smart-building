@@ -1,4 +1,4 @@
-/*!
+/**
  *  @file MinhVHN.h
  *
  *  @section introduction 
@@ -12,7 +12,12 @@
  *  Sensor: TCS34725
  *  Vendor: Adafruit TCS 34725 
  *  Github: https://github.com/adafruit/Adafruit_TCS34725
+ * 
+ *  Sensor: MAX9814
+ *  Vendor: Adafruit MAX9814
+ *  Github: https://github.com/adafruit/Adafruit-MAX9814-AGC-Microphone-PCB
  */
+
 #ifndef _MINHVHN_H_
 #define _MINHVHN_H_
 
@@ -24,29 +29,43 @@
 /* Initialize tcs object for sensor */
 Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_614MS, TCS34725_GAIN_1X);
 
-/*!
- *  @brief Read tcs sensor value and add to message
+/**
+ *  @brief  Read tcs sensor value and add to message
+ * 
+ *  @param  mes
+ *          Instance of obj
  */
-void readTCS() 
+void readTCS(JsonObject mes) 
 {
-    float r, g, b;
-    tcs.getRGB(&r, &g, &b);
-    Serial.print("Red: "); Serial.print(r); Serial.print(" ");
-    Serial.print("Green: "); Serial.print(g); Serial.print(" ");
-    Serial.print("Blue: "); Serial.print(b); Serial.print(" ");
-    Serial.println(" ");
+    // Read raw data from sensor
+    uint16_t r, g, b, c;
+    tcs.getRawData(&r, &g, &b, &c);
+
+    // Add to message json object
+    mes["red"] = r;
+    mes["green"] = g;
+    mes["blue"] = b;
 }
 
-/*!
- * @brief Read MAX9814 sensor 
+/**
+ *  @brief  Read MAX9814 sensor value and add to message
+ * 
+ *  @param  mes
+ *          Instance of obj
  * 
  */
 
-void readMAX()
+void readMAX(JsonObject mes)
 {
-    unsigned long startMillis= millis();  // Start of sample window
+     // Start sampling time
+    unsigned long startMillis= millis(); 
+
+    // Max, min value of sound level
     unsigned int signalMax = 0;
     unsigned int signalMin = 1024;
+
+    // Variable to count noise over 60dB
+    unsigned int noise = 0;
 
     // Collect data for 50 ms (Sufficient lowest frequency 20Hz = 50ms)
     while (millis() - startMillis < 50)
@@ -76,10 +95,15 @@ void readMAX()
     double volts = (peakToPeak * 3.3) / 1024; 
 
     // Covert to decibel (approximately)
-    double db = 20*log10(volts/exp(-44*1.0/10));
-    Serial.print("Sound: ");
-    Serial.print(db);
-    Serial.println("db");
+    // with the microphone sensitivity is -44db, so V RMS / PA is 0.006309
+    double db = 20*log10(volts/0.006309);
+
+    if (db > 60.0)
+    {
+        noise = noise + 1;
+    }
+
+    mes["sound"] = noise;
 }
 
 #endif
