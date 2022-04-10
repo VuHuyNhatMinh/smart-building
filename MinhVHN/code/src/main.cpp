@@ -42,5 +42,6 @@ void loop(void) {
     readCCS(obj);
     readTSL(obj);
     readDust(obj);
+    readPIR(obj);
     serializeJsonPretty(obj, Serial);
 }
