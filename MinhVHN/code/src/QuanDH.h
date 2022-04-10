@@ -1,56 +1,35 @@
-/*!
- *  @section light sensor: 
+/**
+ *  @file 
+ *
+ *  @section introduction 
  * 
- *  Sensor: BH1759FVI
- *  Vendor:
- *  Github:
+ *  @section author
+ *  
+ *  @section library: 
+ * 
  */
-
-
-
-
-
-
-
-
 #ifndef _QUANDH_H_
 #define _QUANDH_H_
 
-
-
-
-#include <Wire.h>
-#include <BH1750.h>
-
+#include <Arduino.h>
 
 #define dust_pin PIN_PA1
 #define led_power PIN_PF1
-#define motion_pin PIN_PE7
 
-
-BH1750 lightMeter;
-
-
-
-String ReadLight(void)
-{
-    float lux = lightMeter.readLightLevel();
-    String data = "Light: ";
-    char s[32];
-  
-    data += dtostrf(lux, 5, 2, s);
-    return data;
-}
-
-
-String ReadDust(void)
+/**
+ * @brief   
+ * 
+ * @param   mes 
+ *          Instance of obj
+ */
+void readDust(JsonObject mes)
 {
     int delay_time=280;
     int delay_time_2=40;
     float off_time=9680; //10000-280-40
 
     int dustVal=0;
-    char s[32];
+    // char s[32];
     float voltage = 0;
     float dustdensity = 0;
 
@@ -74,40 +53,13 @@ String ReadDust(void)
         dustdensity = 0.5;
     }
     
-    String dataString = "Dust: ";
-    dataString += dtostrf(voltage, 9, 4, s);
-    dataString += "V, ";
-    dataString += dtostrf(dustdensity*1000.0, 5, 2, s);
-    dataString += "ug/m3";
+    // String dataString = "Dust: ";
+    // dataString += dtostrf(voltage, 9, 4, s);
+    // dataString += "V, ";
+    // dataString += dtostrf(dustdensity*1000.0, 5, 2, s);
+    // dataString += "ug/m3";
 
-    return dataString;
+    mes["pm25"] = dustdensity;
 }
-
-
-String ReadMotion(void)
-{
-    int motion = digitalRead(PIN_PE7);
-
-    if(motion)
-    {
-        return "Vcl co chuyen dong kia lol!!!!";
-    }
-    else
-    { 
-        return "Cha thay cai gi chuyen dong ca!!!";
-    }
-}
-
-void blink(void)
-{
-    digitalWrite(PIN_PB4, 1); delay(500);
-    digitalWrite(PIN_PB4, 0); delay(500);
-
-    digitalWrite(PIN_PB4, 1); delay(500);
-    digitalWrite(PIN_PB4, 0); delay(500);
-}
-
-
-
 
 #endif

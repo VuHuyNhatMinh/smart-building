@@ -3,12 +3,13 @@
 
 #include "HaiDT.h"
 #include "MinhVHN.h"
+#include "QuanDH.h"
 
 void setup(void) {
     Serial.begin(9600);
-    while (!Serial)
+    // while (!Serial)
 
-    UART1.begin(9600);  // begin UART
+    UART1.begin(9600);  // begin UART1
     // while (!UART1);
 
     UART3.begin(9600);  // begin UART3
@@ -22,7 +23,13 @@ void setup(void) {
     /* Initiate SHT31-D */
     sht31.begin();
 
+    /* Initiate CCS811 */
     ccs.begin();
+
+    /* Initiate TSL2561 */
+    tsl.begin();
+    tsl.enableAutoRange(true);
+    tsl.setIntegrationTime(TSL2561_INTEGRATIONTIME_13MS);
 }
 
 void loop(void) {
@@ -33,5 +40,7 @@ void loop(void) {
     readSHT(obj);
     readMHZ(obj);
     readCCS(obj);
+    readTSL(obj);
+    readDust(obj);
     serializeJsonPretty(obj, Serial);
 }

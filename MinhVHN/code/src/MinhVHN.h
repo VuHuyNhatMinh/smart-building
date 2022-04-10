@@ -34,10 +34,12 @@
 #include <SPI.h>
 #include <Adafruit_TCS34725.h>
 #include <Adafruit_CCS811.h>
+#include <Adafruit_TSL2561_U.h>
 
 /* Initialize tcs object */
 Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_614MS, TCS34725_GAIN_1X);
 Adafruit_CCS811 ccs;
+Adafruit_TSL2561_Unified tsl = Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT, 12345);
 
 /**
  *  @brief  Read tcs sensor value and add to message
@@ -140,4 +142,23 @@ void readCCS(JsonObject mes)
         }
     }
 }
+
+/**
+ *  @brief  Read data from TSL2561 sensor and add value to mes
+ * 
+ *  @param  mes 
+ *          Instance of obj
+ */
+void readTSL(JsonObject mes)
+{
+    /* Get a new sensor event */ 
+    sensors_event_t event;
+    tsl.getEvent(&event);
+    
+    if (event.light)
+    {
+        mes["lux"] = event.light;
+    }
+}
+
 #endif
