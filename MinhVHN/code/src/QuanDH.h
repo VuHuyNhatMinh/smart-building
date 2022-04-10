@@ -60,4 +60,33 @@ void readDust(JsonObject mes)
     mes["pm25"] = stof(dtostrf(dustdensity, 5, 3, s));        //unit mg.m3  // min width: 5, num digits after decimal: 3
 }
 
+
+/**
+ * @brief   
+ * 
+ * @param   mes
+ *          Instance of obj 
+ */
+void readPIR(JsonObject mes)
+{
+    unsigned int cnt = 0;
+    for (int i = 0; i < 60 ; i = i + 1)
+    {
+        if (digitalRead(PIN_PE7))
+        {
+            cnt = cnt + 1;
+        }
+    }
+
+    double temp = cnt*1.0/60;
+
+    if (temp > 50.0) 
+    {
+        mes["motion"] = 1;
+    }
+    else 
+    {
+        mes["motion"] = 0;
+    }
+}
 #endif
