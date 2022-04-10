@@ -20,6 +20,10 @@
  *  Sensor: CCS811
  *  Vendor: Adafruit CCS811
  *  Github: https://github.com/adafruit/Adafruit_CCS811
+ * 
+ *  Sensor: TSL2561
+ *  Vendor Adafruit TSL2561
+ *  Github: https://github.com/adafruit/Adafruit_TSL2561
  */
 
 #ifndef _MINHVHN_H_
@@ -56,9 +60,15 @@ void readTCS(JsonObject mes)
 /**
  *  @brief  Read MAX9814 sensor value and add to message
  * 
+ *  @ref    https://learn.adafruit.com/adafruit-agc-electret-microphone-amplifier-max9814/downloads
+ *          Example Sound Level Sketch for the Adafruit Microphone Amplifier
+ *          https://forums.adafruit.com/viewtopic.php?t=94374
+ *          https://sites.google.com/site/myscratchbooks/home/projects/project-19-using-max9812-mensaure-decibels-db-db-spl
+ * 
  *  @param  mes
  *          Instance of obj
  * 
+ *  @bug    noise variable need to check again, its value remains constantly
  */
 void readMAX(JsonObject mes)
 {
@@ -111,29 +121,23 @@ void readMAX(JsonObject mes)
     mes["sound"] = noise;
 }
 
+/**
+ *  @brief  Read data from CCS811 sensor and add value to mes
+ * 
+ *  @param  mes 
+ *          Instance of obj
+ * 
+ *  @bug    The value read is not changeable
+ */
 void readCCS(JsonObject mes)
 {
-    // if(ccs.available())
-    // {
-    //     if (!ccs.readData())
-    //     {
-    //         mes["eco2"] = ccs.geteCO2();
-    //         mes["tvoc"] = ccs.getTVOC();
-    //     }
-    // }
-    // delay(500);
-      if(ccs.available()){
-    if(!ccs.readData()){
-      Serial.print("CO2: ");
-      Serial.print(ccs.geteCO2());
-      Serial.print("ppm, TVOC: ");
-      Serial.println(ccs.getTVOC());
+    if(ccs.available())
+    {
+        if (!ccs.readData())
+        {
+            mes["eco2"] = ccs.geteCO2();
+            mes["tvoc"] = ccs.getTVOC();
+        }
     }
-    else{
-      Serial.println("ERROR!");
-      while(1);
-    }
-  }
-  delay(500);
 }
 #endif

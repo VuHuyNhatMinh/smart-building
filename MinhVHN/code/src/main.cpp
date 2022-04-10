@@ -9,10 +9,10 @@ void setup(void) {
     while (!Serial)
 
     UART1.begin(9600);  // begin UART
-    while (!UART1);
+    // while (!UART1);
 
     UART3.begin(9600);  // begin UART3
-    while (!UART3);
+    // while (!UART3);
     
     /* Initiate TCS34725 */
     pinMode(PIN_PA0, OUTPUT);
@@ -22,22 +22,16 @@ void setup(void) {
     /* Initiate SHT31-D */
     sht31.begin();
 
-  if(!ccs.begin()){
-    Serial.println("Failed to start sensor! Please check your wiring.");
-    while(1);
-  }
-
-  // Wait for the sensor to be ready
-  while(!ccs.available());
+    ccs.begin();
 }
 
 void loop(void) {
     StaticJsonDocument<200> doc;
     JsonObject obj = doc.to<JsonObject>();
-    // readTCS(obj);
-    // readMAX(obj);
-    // readSHT(obj);
-    // readMHZ(obj);
+    readTCS(obj);
+    readMAX(obj);
+    readSHT(obj);
+    readMHZ(obj);
     readCCS(obj);
     serializeJsonPretty(obj, Serial);
 }
