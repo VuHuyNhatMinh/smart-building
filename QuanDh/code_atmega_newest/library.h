@@ -28,7 +28,7 @@
 #define motion_pin PIN_PE7
 
 
-BH1750 lightMeter;
+BH1750 lightMeter;  //create lightMeter object
 
 
 
