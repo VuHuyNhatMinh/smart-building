@@ -10,12 +10,16 @@
  *  @section library: 
  * 
  *  Sensor: TCS34725
- *  Vendor: Adafruit TCS 34725 
+ *  Vendor: Adafruit TCS34725 
  *  Github: https://github.com/adafruit/Adafruit_TCS34725
  * 
  *  Sensor: MAX9814
  *  Vendor: Adafruit MAX9814
- *  Github: https://github.com/adafruit/Adafruit-MAX9814-AGC-Microphone-PCB
+ *  Github: https://github.com/adafruit/Adafruit-MAX9814-AGC-Microphone-PCB/
+ * 
+ *  Sensor: CCS811
+ *  Vendor: Adafruit CCS811
+ *  Github: https://github.com/adafruit/Adafruit_CCS811
  */
 
 #ifndef _MINHVHN_H_
@@ -24,10 +28,12 @@
 #include <Arduino.h>
 
 #include <SPI.h>
-#include "Adafruit_TCS34725.h"
+#include <Adafruit_TCS34725.h>
+#include <Adafruit_CCS811.h>
 
-/* Initialize tcs object for sensor */
+/* Initialize tcs object */
 Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_614MS, TCS34725_GAIN_1X);
+Adafruit_CCS811 ccs;
 
 /**
  *  @brief  Read tcs sensor value and add to message
@@ -54,7 +60,6 @@ void readTCS(JsonObject mes)
  *          Instance of obj
  * 
  */
-
 void readMAX(JsonObject mes)
 {
      // Start sampling time
@@ -106,4 +111,29 @@ void readMAX(JsonObject mes)
     mes["sound"] = noise;
 }
 
+void readCCS(JsonObject mes)
+{
+    // if(ccs.available())
+    // {
+    //     if (!ccs.readData())
+    //     {
+    //         mes["eco2"] = ccs.geteCO2();
+    //         mes["tvoc"] = ccs.getTVOC();
+    //     }
+    // }
+    // delay(500);
+      if(ccs.available()){
+    if(!ccs.readData()){
+      Serial.print("CO2: ");
+      Serial.print(ccs.geteCO2());
+      Serial.print("ppm, TVOC: ");
+      Serial.println(ccs.getTVOC());
+    }
+    else{
+      Serial.println("ERROR!");
+      while(1);
+    }
+  }
+  delay(500);
+}
 #endif

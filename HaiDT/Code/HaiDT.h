@@ -18,7 +18,7 @@ void Read_SHT21(SoftwareSerial UARTset)
 
 }
 
-
+// Why not use MHZ_CONTINUOUS_MODE
 
 void Read_CO2(SoftwareSerial UARTset1, SoftwareSerial UARTset2)
 {
