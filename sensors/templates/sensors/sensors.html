@@ -1,0 +1,10 @@
+<body>
+    <ul>
+        {% for sensor in sensors %}
+            <li><div>{{ sensor.macaddress }}</div></li>
+            <div>Temperature: {{ sensor.temp }}&#176C</div>
+            <div>Humidity: {{ sensor.hum }}%</div>
+            <div>Time: {{ sensor.created }}</div>
+        {% endfor %}
+    </ul>
+</body>
