@@ -5,9 +5,15 @@ urlpatterns = [
     # TODO: GET, POST method - Dinh Hong Quan
     path('listCreate/',views.SensorListCreate.as_view()),
 
+    #retrieve only one specific record in database
+    path('retrieve/<int:pk>/',views.SensorDetail.as_view()),
+
+    #create one record in database
+    path('create/',views.SensorCreate.as_view()),
+
     # PUT/PATCH method
-    path('update/<int:pk>', views.SensorUpdate.as_view()),
+    path('update/<int:pk>/', views.SensorUpdate.as_view()),
 
     # DELETE method
-    path('delete/<int:pk>', views.SensorDelete.as_view()),
+    path('delete/<int:pk>/', views.SensorDelete.as_view()),
 ]
