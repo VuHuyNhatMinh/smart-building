@@ -1,0 +1,1 @@
+- logging file: write all states of program in a text.txt file
