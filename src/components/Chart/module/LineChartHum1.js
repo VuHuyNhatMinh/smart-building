@@ -1,22 +1,3 @@
-
-// import {
-//   Chart as ChartJS,
-//   CategoryScale,
-//   LinearScale,
-//   BarElement,
-//   Title,
-//   Tooltip,
-//   Legend,
-// } from "chart.js";
-
-// ChartJS.register(
-//   CategoryScale,
-//   LinearScale,
-//   BarElement,
-//   Title,
-//   Tooltip,
-//   Legend
-// );
 import Chart from 'chart.js/auto';
 import { Bar, Line } from "react-chartjs-2";
 import React, { useState, useEffect } from "react";
