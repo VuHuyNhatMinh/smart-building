@@ -32,7 +32,7 @@ export const useFetch = (url) => {
   };
 
   useEffect(() => {   
-    setTimeout(() => {getSensors()}, 2000); 
+    setTimeout(() => {getSensors()}, 1000); 
     // Mỗi khi fetch dữ liệu về thì sẽ trigger hàm setSensors rồi sẽ re-render lại component rồi sẽ lại 
     // trigger useEffect và rồi lại trigger getSensors lần nữa
   });

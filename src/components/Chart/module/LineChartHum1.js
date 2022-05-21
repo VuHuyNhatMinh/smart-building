@@ -6,7 +6,17 @@ import React, { useState, useEffect } from "react";
 
 //This is AC:0B:FB:CE:AD:1F 
 
-function LineChartHum1({data}) {
+function LineChartHum1({data, id}) {
+  // let mac = "";
+  // if(id===1)
+  // { 
+  //   mac = "AC:0B:FB:CE:AD:1F";
+  // }
+  // else if(id===2)
+  // {
+  //   mac = "4C:75:25:06:A1:E7";
+  // }
+
   console.log(data); 
   const [chartData, setChartData] = useState({
     labels: [],
@@ -155,7 +165,7 @@ function LineChartHum1({data}) {
      <>
       
      
-     <div style={{ position: "relative", margin: "auto", width: "50%"  }}>
+     <div style={{ position: "relative", margin: "auto", width: "80%"  }}>
        <Line options={chartOptions} data={chartData}  />
     </div>
     

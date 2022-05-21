@@ -7,7 +7,8 @@ import LineChartTem1 from './module/LineChartTem1'
 
 let ChartPage1 = () =>    //tên component phải là Capital    //truyền các component con vào component lớn này 
 {
-  let url = `http://localhost:8000/api/v1/sensors/listCreate/${id}`;
+  // let url = `http://localhost:8000/api/v1/sensors/listCreate/${id}`;
+  let url = `http://localhost:8000/api/v1/sensors/listCreate1/`;
   //Mỗi lần fetch lại data mới thì cái sensros sẽ bị thay đổi state nên là sẽ re-render lại cái SensorsList chứa cái state này nhưng cái 
   //SpidermanList sẽ ko re-render lại vì prop của nó vẫn thế 
 

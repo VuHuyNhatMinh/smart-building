@@ -130,7 +130,7 @@ function LineChartHum1({data}) {
             y: {
                 title: {
                   display: true,
-                  text: 'Humidity',
+                  text: '%',
                   font: {
                         family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
                         size: 20,
@@ -174,7 +174,7 @@ function LineChartHum1({data}) {
      <>
       
      
-     <div style={{ position: "relative", margin: "auto", width: "50%"  }}>
+     <div style={{ position: "relative", margin: "auto", width: "80%"  }}>
        <Line options={chartOptions} data={chartData}  />
     </div>
     

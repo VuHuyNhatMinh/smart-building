@@ -26,6 +26,15 @@ import React, { useState, useEffect } from "react";
  
  
 function LineChartTem1({data}) {
+  // let mac = "";
+  // if(id===1)
+  // { 
+  //   mac = "AC:0B:FB:CE:AD:1F";
+  // }
+  // else if(id===2)
+  // {
+  //   mac = "4C:75:25:06:A1:E7";
+  // }
 //   console.log(data); 
   const [chartData, setChartData] = useState({
     labels: [],
@@ -175,7 +184,7 @@ function LineChartTem1({data}) {
      <>
       
      
-     <div style={{ position: "relative", margin: "auto", width: "50%"  }}>
+     <div style={{ position: "relative", margin: "auto", width: "80%"  }}>
        <Line options={chartOptions} data={chartData}  />
     </div>
 
