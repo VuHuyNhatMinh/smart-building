@@ -7,9 +7,9 @@ import {
   Link
 } from "react-router-dom";
 
-import { About } from './module/About';
-import { Contact } from './module/Contact';
-import Home from './module/Home';
+import { About } from './About';
+import { Contact } from './Contact';
+import Home from './Home';
 
 export default function Header() {
   return (
