@@ -1,0 +1,5 @@
+DRC Rules Export File for PCB: C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc
+RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion|Scope=Board|Minimum=4.00
+RuleKind=Width|RuleName=Width_powerclass|Scope=Board|Minimum=19.69
+RuleKind=Clearance|RuleName=Clearance|Scope=Board|Minimum=50.00
+RuleKind=ShortCircuit|RuleName=ShortCircuit|Scope=Board|Allowed=0

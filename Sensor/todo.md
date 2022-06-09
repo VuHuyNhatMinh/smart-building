@@ -1,0 +1,5 @@
+- [ ] Read from all sensors
+- [ ] Use all peripheral devices
+- [ ] Seperate code to be more abstract
+- [ ] Add loging file function
+- [ ] Test others boards
