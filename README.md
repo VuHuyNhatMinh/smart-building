@@ -1,8 +1,8 @@
 # ABOUT
 
-This is the dev branch for this project.
+This is the main branch for this project.
 
-This branch will be updated every 8 weeks.
+This branch has tags and release products.
 
 # AUTHORS
 
