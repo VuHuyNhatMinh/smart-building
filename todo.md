@@ -1,4 +1,5 @@
-- logging file: write all states of program in a text.txt file
-- need authentication for POST, PUT, DELETE
-- use them same endpoint with all method
-- change database to match with design
+- [ ] Read from all sensors
+- [ ] Use all peripheral devices
+- [ ] Seperate code to be more abstract
+- [ ] Add loging file function
+- [ ] Test others boards
