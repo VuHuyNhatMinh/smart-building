@@ -1,0 +1,6 @@
+Added Component: Designator=VIT5(VIT)
+Add component. Clean all parameters for all variants
+Added Component: Designator=VIT6(VIT)
+Add component. Clean all parameters for all variants
+Added Member To Class: ClassName=BOARD4_quangnguyen Member=Component VIT5 5
+Added Member To Class: ClassName=BOARD4_quangnguyen Member=Component VIT6 6

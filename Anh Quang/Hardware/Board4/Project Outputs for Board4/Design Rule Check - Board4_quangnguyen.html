@@ -1,0 +1,574 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD18\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">10-May-20</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">10:29:08 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc" class="file"><acronym title="C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc">C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">82</td></tr>
+</table>
+</td>
+</table><a name="IDGDVWSAT5G2ZEGV5NO1MWUQ3C3D0S4SUIUMHMQFH05TNETYLF302"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDSIM5EPTMTXZWMV4G3ZD1DMNQDDFHB50RWAFXIJHN2BIJU3KBROO">Clearance Constraint (Gap=0.008mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDVN2RKIAERVTZBCERU5NMEPBXZMCRBOJ3WOXSGLPVEGFYTYVWIT2F">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDEUKGGIBVWHY0CHCSBY5DHNJ3BGW2DQD5M0DPGVMPENTTQWZ1PZZD">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDMNLP1CBLTZVAOANRKR40BZU2SORPIIIY3ULD2BJWF2ONDJPDHUJL">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID0X0FB4GWWO3TETFD4RW0Y0TG5HEZRDNDZIYVH3MBGGHZC3LWM3QF">Width Constraint (Min=0.5mm) (Max=2mm) (Preferred=1mm) (InNetClass('Power_class'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDB242Y3FIWFNEEX2ALRYZNMOVCMTBJDFIM4V1I5JKVGAKKO3MPABM">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDBZWQZGYECCI4O0GDKD30ZIH0JFQ5EK5DUTF5KSEN0WRTMNZNLNRP">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDKJ1IALHVJ3C3M0VM5053BAJ2YG5LOAHBNREGZHDOKQIT4XKI31J">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDWE5PK022PNQWDRYGB3K4JCZRZJREWIPKQIDPGIKXWL0JW1USGWXI">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDOMBDTZPQTBTTMVHOSH322Z0TFHKDOS34N3P5IHHYE4ZBHH0QYMBE">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">82</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID4C3BXZTRGYAIOG5CXSE1NLY3LK3FBCNZWR3QOWBDUZJ1WHRQU4WL">Silk to Silk (Clearance=0.254mm) (IsObjectKind('Text')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDM5BMBIYFQ1RZH2QKFYKNSAOHJNDXNKDXRK1F41OSDL4B2DS2LHFE">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDN2TP3BIY2ZPPHRBG1OPJZE35WLZTA4TXXUHH5BNBNA31WUIAYM1E">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">82</td>
+</tr>
+</table><br><a name="IDOMBDTZPQTBTTMVHOSH322Z0TFHKDOS34N3P5IHHYE4ZBHH0QYMBE"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4506.518mil|Location2.X=4514.185mil|Location1.Y=3646.518mil|Location2.Y=3654.185mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4506.518mil|Location2.X=4514.185mil|Location1.Y=3646.518mil|Location2.Y=3654.185mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (115.443mm,93.599mm) on Top Overlay And Pad IC1-2(115.443mm,93.599mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4587.445mil|Location2.X=4598.695mil|Location1.Y=2823.175mil|Location2.Y=2835.613mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4587.445mil|Location2.X=4598.695mil|Location1.Y=2823.175mil|Location2.Y=2835.613mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.021mm &lt; 0.254mm) Between Arc (118.745mm,73.157mm) on Top Overlay And Pad C5-1(117.562mm,73.157mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.021mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4753.834mil|Location2.X=4765.084mil|Location1.Y=2910.879mil|Location2.Y=2923.993mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4753.834mil|Location2.X=4765.084mil|Location1.Y=2910.879mil|Location2.Y=2923.993mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.194mm &lt; 0.254mm) Between Arc (118.745mm,73.157mm) on Top Overlay And Pad C5-2(120.102mm,73.157mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.194mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5193.393mil|Location2.X=5204.643mil|Location1.Y=3799.653mil|Location2.Y=3811.739mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5193.393mil|Location2.X=5204.643mil|Location1.Y=3799.653mil|Location2.Y=3811.739mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.134mm &lt; 0.254mm) Between Arc (132.842mm,97.219mm) on Top Overlay And Pad C3-2(132.842mm,97.6mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.134mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5218.411mil|Location2.X=5229.661mil|Location1.Y=3784.635mil|Location2.Y=3795.885mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5218.411mil|Location2.X=5229.661mil|Location1.Y=3784.635mil|Location2.Y=3795.885mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.143mm &lt; 0.254mm) Between Arc (132.842mm,97.219mm) on Top Overlay And Pad C3-2(132.842mm,97.6mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.143mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5194.849mil|Location2.X=5206.099mil|Location1.Y=3875.007mil|Location2.Y=3886.725mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5194.849mil|Location2.X=5206.099mil|Location1.Y=3875.007mil|Location2.Y=3886.725mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.127mm &lt; 0.254mm) Between Arc (132.842mm,97.981mm) on Top Overlay And Pad C3-2(132.842mm,97.6mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.127mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5218.67mil|Location2.X=5230.488mil|Location1.Y=3889.385mil|Location2.Y=3900.635mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5218.67mil|Location2.X=5230.488mil|Location1.Y=3889.385mil|Location2.Y=3900.635mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.224mm &lt; 0.254mm) Between Arc (132.842mm,97.981mm) on Top Overlay And Pad C3-2(132.842mm,97.6mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.224mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3714.028mil|Location2.X=3725.278mil|Location1.Y=3242.974mil|Location2.Y=3255.412mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3714.028mil|Location2.X=3725.278mil|Location1.Y=3242.974mil|Location2.Y=3255.412mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.021mm &lt; 0.254mm) Between Arc (96.56mm,83.82mm) on Top Overlay And Pad C2-1(95.377mm,83.82mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.021mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3880.417mil|Location2.X=3891.667mil|Location1.Y=3330.678mil|Location2.Y=3343.792mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3880.417mil|Location2.X=3891.667mil|Location1.Y=3330.678mil|Location2.Y=3343.792mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.194mm &lt; 0.254mm) Between Arc (96.56mm,83.82mm) on Top Overlay And Pad C2-2(97.917mm,83.82mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.194mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4861.073mil|Location2.X=4872.323mil|Location1.Y=2256.768mil|Location2.Y=2268.018mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4861.073mil|Location2.X=4872.323mil|Location1.Y=2256.768mil|Location2.Y=2268.018mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.242mm &lt; 0.254mm) Between Pad 3.3V-1(123.763mm,58.525mm) on Multi-Layer And Track (122.493mm,57.255mm)(132.653mm,57.255mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.242mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4859.153mil|Location2.X=4870.403mil|Location1.Y=2340.044mil|Location2.Y=2351.294mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4859.153mil|Location2.X=4870.403mil|Location1.Y=2340.044mil|Location2.Y=2351.294mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.252mm &lt; 0.254mm) Between Pad 3.3V-1(123.763mm,58.525mm) on Multi-Layer And Track (122.493mm,59.795mm)(132.653mm,59.795mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.252mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4903.469mil|Location2.X=4914.719mil|Location1.Y=2311.29mil|Location2.Y=2322.54mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4903.469mil|Location2.X=4914.719mil|Location1.Y=2311.29mil|Location2.Y=2322.54mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.252mm &lt; 0.254mm) Between Pad 3.3V-1(123.763mm,58.525mm) on Multi-Layer And Track (124.906mm,57.255mm)(124.906mm,59.77mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.252mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4962.073mil|Location2.X=4973.323mil|Location1.Y=2256.768mil|Location2.Y=2268.018mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4962.073mil|Location2.X=4973.323mil|Location1.Y=2256.768mil|Location2.Y=2268.018mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.242mm &lt; 0.254mm) Between Pad 3.3V-2(126.328mm,58.525mm) on Multi-Layer And Track (122.493mm,57.255mm)(132.653mm,57.255mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.242mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4960.153mil|Location2.X=4971.403mil|Location1.Y=2340.044mil|Location2.Y=2351.294mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4960.153mil|Location2.X=4971.403mil|Location1.Y=2340.044mil|Location2.Y=2351.294mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.252mm &lt; 0.254mm) Between Pad 3.3V-2(126.328mm,58.525mm) on Multi-Layer And Track (122.493mm,59.795mm)(132.653mm,59.795mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.252mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5060.073mil|Location2.X=5071.323mil|Location1.Y=2256.768mil|Location2.Y=2268.018mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5060.073mil|Location2.X=5071.323mil|Location1.Y=2256.768mil|Location2.Y=2268.018mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.242mm &lt; 0.254mm) Between Pad 3.3V-3(128.818mm,58.525mm) on Multi-Layer And Track (122.493mm,57.255mm)(132.653mm,57.255mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.242mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5058.153mil|Location2.X=5069.403mil|Location1.Y=2340.044mil|Location2.Y=2351.294mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5058.153mil|Location2.X=5069.403mil|Location1.Y=2340.044mil|Location2.Y=2351.294mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.252mm &lt; 0.254mm) Between Pad 3.3V-3(128.818mm,58.525mm) on Multi-Layer And Track (122.493mm,59.795mm)(132.653mm,59.795mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.252mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5161.073mil|Location2.X=5172.323mil|Location1.Y=2256.768mil|Location2.Y=2268.018mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5161.073mil|Location2.X=5172.323mil|Location1.Y=2256.768mil|Location2.Y=2268.018mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.242mm &lt; 0.254mm) Between Pad 3.3V-4(131.383mm,58.525mm) on Multi-Layer And Track (122.493mm,57.255mm)(132.653mm,57.255mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.242mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5159.153mil|Location2.X=5170.403mil|Location1.Y=2340.044mil|Location2.Y=2351.294mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5159.153mil|Location2.X=5170.403mil|Location1.Y=2340.044mil|Location2.Y=2351.294mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.252mm &lt; 0.254mm) Between Pad 3.3V-4(131.383mm,58.525mm) on Multi-Layer And Track (122.493mm,59.795mm)(132.653mm,59.795mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.252mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4391.073mil|Location2.X=4402.323mil|Location1.Y=2256.768mil|Location2.Y=2268.018mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4391.073mil|Location2.X=4402.323mil|Location1.Y=2256.768mil|Location2.Y=2268.018mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.242mm &lt; 0.254mm) Between Pad 5V-1(111.825mm,58.525mm) on Multi-Layer And Track (110.555mm,57.255mm)(120.715mm,57.255mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.242mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4389.153mil|Location2.X=4400.403mil|Location1.Y=2340.044mil|Location2.Y=2351.294mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4389.153mil|Location2.X=4400.403mil|Location1.Y=2340.044mil|Location2.Y=2351.294mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.252mm &lt; 0.254mm) Between Pad 5V-1(111.825mm,58.525mm) on Multi-Layer And Track (110.555mm,59.795mm)(120.715mm,59.795mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.252mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4433.469mil|Location2.X=4444.719mil|Location1.Y=2311.29mil|Location2.Y=2322.54mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4433.469mil|Location2.X=4444.719mil|Location1.Y=2311.29mil|Location2.Y=2322.54mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.252mm &lt; 0.254mm) Between Pad 5V-1(111.825mm,58.525mm) on Multi-Layer And Track (112.968mm,57.255mm)(112.968mm,59.77mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.252mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4492.073mil|Location2.X=4503.323mil|Location1.Y=2256.768mil|Location2.Y=2268.018mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4492.073mil|Location2.X=4503.323mil|Location1.Y=2256.768mil|Location2.Y=2268.018mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.242mm &lt; 0.254mm) Between Pad 5V-2(114.39mm,58.525mm) on Multi-Layer And Track (110.555mm,57.255mm)(120.715mm,57.255mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.242mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4490.153mil|Location2.X=4501.403mil|Location1.Y=2340.044mil|Location2.Y=2351.294mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4490.153mil|Location2.X=4501.403mil|Location1.Y=2340.044mil|Location2.Y=2351.294mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.252mm &lt; 0.254mm) Between Pad 5V-2(114.39mm,58.525mm) on Multi-Layer And Track (110.555mm,59.795mm)(120.715mm,59.795mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.252mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4590.073mil|Location2.X=4601.323mil|Location1.Y=2256.768mil|Location2.Y=2268.018mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4590.073mil|Location2.X=4601.323mil|Location1.Y=2256.768mil|Location2.Y=2268.018mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.242mm &lt; 0.254mm) Between Pad 5V-3(116.88mm,58.525mm) on Multi-Layer And Track (110.555mm,57.255mm)(120.715mm,57.255mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.242mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4588.153mil|Location2.X=4599.403mil|Location1.Y=2340.044mil|Location2.Y=2351.294mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4588.153mil|Location2.X=4599.403mil|Location1.Y=2340.044mil|Location2.Y=2351.294mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.252mm &lt; 0.254mm) Between Pad 5V-3(116.88mm,58.525mm) on Multi-Layer And Track (110.555mm,59.795mm)(120.715mm,59.795mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.252mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4691.073mil|Location2.X=4702.323mil|Location1.Y=2256.768mil|Location2.Y=2268.018mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4691.073mil|Location2.X=4702.323mil|Location1.Y=2256.768mil|Location2.Y=2268.018mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.242mm &lt; 0.254mm) Between Pad 5V-4(119.445mm,58.525mm) on Multi-Layer And Track (110.555mm,57.255mm)(120.715mm,57.255mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.242mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4689.153mil|Location2.X=4700.403mil|Location1.Y=2340.044mil|Location2.Y=2351.294mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4689.153mil|Location2.X=4700.403mil|Location1.Y=2340.044mil|Location2.Y=2351.294mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.252mm &lt; 0.254mm) Between Pad 5V-4(119.445mm,58.525mm) on Multi-Layer And Track (110.555mm,59.795mm)(120.715mm,59.795mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.252mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3739.375mil|Location2.X=3750.625mil|Location1.Y=3347.625mil|Location2.Y=3358.875mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3739.375mil|Location2.X=3750.625mil|Location1.Y=3347.625mil|Location2.Y=3358.875mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.165mm &lt; 0.254mm) Between Pad C2-1(95.377mm,83.82mm) on Multi-Layer And Track (95.123mm,85.344mm)(95.631mm,85.344mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.165mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.167mil|Location2.X=3758.833mil|Location1.Y=3346.167mil|Location2.Y=3353.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.167mil|Location2.X=3758.833mil|Location1.Y=3346.167mil|Location2.Y=3353.833mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C2-1(95.377mm,83.82mm) on Multi-Layer And Track (95.377mm,85.09mm)(95.377mm,85.598mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3746.125mil|Location2.X=3757.375mil|Location1.Y=2849.576mil|Location2.Y=2860.826mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3746.125mil|Location2.X=3757.375mil|Location1.Y=2849.576mil|Location2.Y=2860.826mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.165mm &lt; 0.254mm) Between Pad C21-1(96.266mm,72.522mm) on Multi-Layer And Track (94.615mm,72.522mm)(95.123mm,72.522mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.165mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3903.511mil|Location2.X=3914.761mil|Location1.Y=2880.576mil|Location2.Y=2891.826mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3903.511mil|Location2.X=3914.761mil|Location1.Y=2880.576mil|Location2.Y=2891.826mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.145mm &lt; 0.254mm) Between Pad C21-2(98.806mm,72.522mm) on Multi-Layer And Region (0 hole(s)) Top Overlay [Top Overlay] to [Top Solder] clearance [0.145mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3846.36mil|Location2.X=3857.61mil|Location1.Y=3256.448mil|Location2.Y=3267.698mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3846.36mil|Location2.X=3857.61mil|Location1.Y=3256.448mil|Location2.Y=3267.698mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.153mm &lt; 0.254mm) Between Pad C2-2(97.917mm,83.82mm) on Multi-Layer And Region (0 hole(s)) Top Overlay [Top Overlay] to [Top Solder] clearance [0.153mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5036.875mil|Location2.X=5048.125mil|Location1.Y=3836.875mil|Location2.Y=3848.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5036.875mil|Location2.X=5048.125mil|Location1.Y=3836.875mil|Location2.Y=3848.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.127mm &lt; 0.254mm) Between Pad C3-1(129.032mm,97.6mm) on Multi-Layer And Track (126.746mm,97.6mm)(127.889mm,97.6mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.127mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5196.995mil|Location2.X=5208.245mil|Location1.Y=3879.255mil|Location2.Y=3890.505mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5196.995mil|Location2.X=5208.245mil|Location1.Y=3879.255mil|Location2.Y=3890.505mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.188mm &lt; 0.254mm) Between Pad C3-2(132.842mm,97.6mm) on Multi-Layer And Region (0 hole(s)) Top Overlay [Top Overlay] to [Top Solder] clearance [0.188mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5184.367mil|Location2.X=5195.617mil|Location1.Y=3821.875mil|Location2.Y=3833.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5184.367mil|Location2.X=5195.617mil|Location1.Y=3821.875mil|Location2.Y=3833.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.254mm &lt; 0.254mm) Between Pad C3-2(132.842mm,97.6mm) on Multi-Layer And Track (131.572mm,93.409mm)(131.572mm,101.79mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.254mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5187.014mil|Location2.X=5198.264mil|Location1.Y=3859.206mil|Location2.Y=3872.713mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5187.014mil|Location2.X=5198.264mil|Location1.Y=3859.206mil|Location2.Y=3872.713mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.157mm &lt; 0.254mm) Between Pad C3-2(132.842mm,97.6mm) on Multi-Layer And Track (131.572mm,98.234mm)(131.699mm,98.234mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.157mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5186.995mil|Location2.X=5198.245mil|Location1.Y=3817.654mil|Location2.Y=3828.904mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5186.995mil|Location2.X=5198.245mil|Location1.Y=3817.654mil|Location2.Y=3828.904mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad C3-2(132.842mm,97.6mm) on Multi-Layer And Track (131.699mm,97.091mm)(131.699mm,98.362mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5261.374mil|Location2.X=5272.624mil|Location1.Y=3816.875mil|Location2.Y=3828.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5261.374mil|Location2.X=5272.624mil|Location1.Y=3816.875mil|Location2.Y=3828.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad C3-2(132.842mm,97.6mm) on Multi-Layer And Track (133.985mm,97.091mm)(133.985mm,97.981mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5109.542mil|Location2.X=5120.792mil|Location1.Y=3269.375mil|Location2.Y=3280.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5109.542mil|Location2.X=5120.792mil|Location1.Y=3269.375mil|Location2.Y=3280.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.165mm &lt; 0.254mm) Between Pad C4-1(130.897mm,83.185mm) on Multi-Layer And Track (129.246mm,83.185mm)(129.754mm,83.185mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.165mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5266.928mil|Location2.X=5278.178mil|Location1.Y=3300.375mil|Location2.Y=3311.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5266.928mil|Location2.X=5278.178mil|Location1.Y=3300.375mil|Location2.Y=3311.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.145mm &lt; 0.254mm) Between Pad C4-2(133.437mm,83.185mm) on Multi-Layer And Region (0 hole(s)) Top Overlay [Top Overlay] to [Top Solder] clearance [0.145mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4612.792mil|Location2.X=4624.042mil|Location1.Y=2927.826mil|Location2.Y=2939.076mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4612.792mil|Location2.X=4624.042mil|Location1.Y=2927.826mil|Location2.Y=2939.076mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.165mm &lt; 0.254mm) Between Pad C5-1(117.562mm,73.157mm) on Multi-Layer And Track (117.308mm,74.681mm)(117.816mm,74.681mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.165mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4624.584mil|Location2.X=4632.25mil|Location1.Y=2926.367mil|Location2.Y=2934.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4624.584mil|Location2.X=4632.25mil|Location1.Y=2926.367mil|Location2.Y=2934.034mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C5-1(117.562mm,73.157mm) on Multi-Layer And Track (117.562mm,74.427mm)(117.562mm,74.935mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4719.777mil|Location2.X=4731.027mil|Location1.Y=2836.649mil|Location2.Y=2847.899mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4719.777mil|Location2.X=4731.027mil|Location1.Y=2836.649mil|Location2.Y=2847.899mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.153mm &lt; 0.254mm) Between Pad C5-2(120.102mm,73.157mm) on Multi-Layer And Region (0 hole(s)) Top Overlay [Top Overlay] to [Top Solder] clearance [0.153mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2590.541mil|Location2.X=2601.791mil|Location1.Y=3843.459mil|Location2.Y=3854.709mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2590.541mil|Location2.X=2601.791mil|Location1.Y=3843.459mil|Location2.Y=3854.709mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.135mm &lt; 0.254mm) Between Pad Fuse-1(67.056mm,98.743mm) on Multi-Layer And Track (65.786mm,95.567mm)(65.786mm,101.918mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.135mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2878.209mil|Location2.X=2889.459mil|Location1.Y=3920.291mil|Location2.Y=3931.541mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2878.209mil|Location2.X=2889.459mil|Location1.Y=3920.291mil|Location2.Y=3931.541mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.135mm &lt; 0.254mm) Between Pad Fuse-1(72.136mm,98.743mm) on Multi-Layer And Track (73.406mm,95.567mm)(73.406mm,101.918mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.135mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3240.541mil|Location2.X=3251.791mil|Location1.Y=3843.459mil|Location2.Y=3854.709mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3240.541mil|Location2.X=3251.791mil|Location1.Y=3843.459mil|Location2.Y=3854.709mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.135mm &lt; 0.254mm) Between Pad Fuse-2(83.566mm,98.743mm) on Multi-Layer And Track (82.296mm,95.567mm)(82.296mm,101.918mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.135mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3528.209mil|Location2.X=3539.459mil|Location1.Y=3920.291mil|Location2.Y=3931.541mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3528.209mil|Location2.X=3539.459mil|Location1.Y=3920.291mil|Location2.Y=3931.541mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.135mm &lt; 0.254mm) Between Pad Fuse-2(88.646mm,98.743mm) on Multi-Layer And Track (89.916mm,95.567mm)(89.916mm,101.918mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.135mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4504.259mil|Location2.X=4515.509mil|Location1.Y=3642.826mil|Location2.Y=3654.076mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4504.259mil|Location2.X=4515.509mil|Location1.Y=3642.826mil|Location2.Y=3654.076mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.061mm &lt; 0.254mm) Between Pad IC1-2(115.443mm,93.599mm) on Multi-Layer And Track (114.173mm,92.075mm)(114.59mm,92.492mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.061mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4563.628mil|Location2.X=4574.878mil|Location1.Y=3635.206mil|Location2.Y=3646.456mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4563.628mil|Location2.X=4574.878mil|Location1.Y=3635.206mil|Location2.Y=3646.456mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.19mm &lt; 0.254mm) Between Pad IC1-2(115.443mm,93.599mm) on Multi-Layer And Track (116.307mm,92.481mm)(116.713mm,92.075mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.19mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2386.167mil|Location2.X=2393.833mil|Location1.Y=3792.973mil|Location2.Y=3800.639mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2386.167mil|Location2.X=2393.833mil|Location1.Y=3792.973mil|Location2.Y=3800.639mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad JDC-1(60.833mm,97.711mm) on Multi-Layer And Track (60.706mm,93.139mm)(60.706mm,101.521mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2241.842mil|Location2.X=2253.092mil|Location1.Y=3654.935mil|Location2.Y=3666.185mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2241.842mil|Location2.X=2253.092mil|Location1.Y=3654.935mil|Location2.Y=3666.185mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.143mm &lt; 0.254mm) Between Pad JDC-3(58.293mm,92.631mm) on Multi-Layer And Track (46.863mm,93.139mm)(60.706mm,93.139mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.143mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3335.375mil|Location2.X=3346.625mil|Location1.Y=2905.826mil|Location2.Y=2917.076mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3335.375mil|Location2.X=3346.625mil|Location1.Y=2905.826mil|Location2.Y=2917.076mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.064mm &lt; 0.254mm) Between Pad L1-1(85.09mm,72.649mm) on Multi-Layer And Track (84.861mm,74.072mm)(84.861mm,74.783mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.064mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2643.375mil|Location2.X=2654.625mil|Location1.Y=2905.326mil|Location2.Y=2916.576mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2643.375mil|Location2.X=2654.625mil|Location1.Y=2905.326mil|Location2.Y=2916.576mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.038mm &lt; 0.254mm) Between Pad L2-1(67.31mm,72.649mm) on Multi-Layer And Track (67.285mm,74.046mm)(67.285mm,74.757mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3180.375mil|Location2.X=3191.625mil|Location1.Y=2824.375mil|Location2.Y=2835.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3180.375mil|Location2.X=3191.625mil|Location1.Y=2824.375mil|Location2.Y=2835.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.254mm) Between Pad R1-1(81.661mm,71.247mm) on Top Layer And Track (80.823mm,70.434mm)(80.823mm,74.32mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3236.875mil|Location2.X=3248.125mil|Location1.Y=2772.125mil|Location2.Y=2783.375mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3236.875mil|Location2.X=3248.125mil|Location1.Y=2772.125mil|Location2.Y=2783.375mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.114mm &lt; 0.254mm) Between Pad R1-1(81.661mm,71.247mm) on Top Layer And Track (80.823mm,70.434mm)(82.525mm,70.434mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.114mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3184.375mil|Location2.X=3195.625mil|Location1.Y=2824.875mil|Location2.Y=2836.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3184.375mil|Location2.X=3195.625mil|Location1.Y=2824.875mil|Location2.Y=2836.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.025mm &lt; 0.254mm) Between Pad R1-1(81.661mm,71.247mm) on Top Layer And Track (81.026mm,71.958mm)(81.026mm,72.822mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.025mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3234.375mil|Location2.X=3245.625mil|Location1.Y=2824.875mil|Location2.Y=2836.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3234.375mil|Location2.X=3245.625mil|Location1.Y=2824.875mil|Location2.Y=2836.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.025mm &lt; 0.254mm) Between Pad R1-1(81.661mm,71.247mm) on Top Layer And Track (82.296mm,71.958mm)(82.296mm,72.822mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.025mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3238.875mil|Location2.X=3250.125mil|Location1.Y=2774.375mil|Location2.Y=2785.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3238.875mil|Location2.X=3250.125mil|Location1.Y=2774.375mil|Location2.Y=2785.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.102mm &lt; 0.254mm) Between Pad R1-1(81.661mm,71.247mm) on Top Layer And Track (82.525mm,70.434mm)(82.525mm,74.32mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.102mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3180.375mil|Location2.X=3191.625mil|Location1.Y=2914.375mil|Location2.Y=2925.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3180.375mil|Location2.X=3191.625mil|Location1.Y=2914.375mil|Location2.Y=2925.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.254mm) Between Pad R1-2(81.661mm,73.533mm) on Top Layer And Track (80.823mm,70.434mm)(80.823mm,74.32mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3181.875mil|Location2.X=3193.125mil|Location1.Y=2916.125mil|Location2.Y=2927.375mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3181.875mil|Location2.X=3193.125mil|Location1.Y=2916.125mil|Location2.Y=2927.375mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.089mm &lt; 0.254mm) Between Pad R1-2(81.661mm,73.533mm) on Top Layer And Track (80.823mm,74.32mm)(82.525mm,74.32mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.089mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3184.375mil|Location2.X=3195.625mil|Location1.Y=2863.875mil|Location2.Y=2875.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3184.375mil|Location2.X=3195.625mil|Location1.Y=2863.875mil|Location2.Y=2875.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.025mm &lt; 0.254mm) Between Pad R1-2(81.661mm,73.533mm) on Top Layer And Track (81.026mm,71.958mm)(81.026mm,72.822mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.025mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3236.265mil|Location2.X=3247.756mil|Location1.Y=2863.643mil|Location2.Y=2874.893mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3236.265mil|Location2.X=3247.756mil|Location1.Y=2863.643mil|Location2.Y=2874.893mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad R1-2(81.661mm,73.533mm) on Top Layer And Track (82.296mm,71.958mm)(82.296mm,72.822mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3238.875mil|Location2.X=3250.125mil|Location1.Y=2864.375mil|Location2.Y=2875.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3238.875mil|Location2.X=3250.125mil|Location1.Y=2864.375mil|Location2.Y=2875.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.102mm &lt; 0.254mm) Between Pad R1-2(81.661mm,73.533mm) on Top Layer And Track (82.525mm,70.434mm)(82.525mm,74.32mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.102mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2480.375mil|Location2.X=2491.625mil|Location1.Y=2824.375mil|Location2.Y=2835.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2480.375mil|Location2.X=2491.625mil|Location1.Y=2824.375mil|Location2.Y=2835.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.254mm) Between Pad R2-1(63.881mm,71.247mm) on Top Layer And Track (63.043mm,70.434mm)(63.043mm,74.32mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2536.875mil|Location2.X=2548.125mil|Location1.Y=2772.125mil|Location2.Y=2783.375mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2536.875mil|Location2.X=2548.125mil|Location1.Y=2772.125mil|Location2.Y=2783.375mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.114mm &lt; 0.254mm) Between Pad R2-1(63.881mm,71.247mm) on Top Layer And Track (63.043mm,70.434mm)(64.745mm,70.434mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.114mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2484.375mil|Location2.X=2495.625mil|Location1.Y=2824.875mil|Location2.Y=2836.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2484.375mil|Location2.X=2495.625mil|Location1.Y=2824.875mil|Location2.Y=2836.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.025mm &lt; 0.254mm) Between Pad R2-1(63.881mm,71.247mm) on Top Layer And Track (63.246mm,71.958mm)(63.246mm,72.822mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.025mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.375mil|Location2.X=2545.625mil|Location1.Y=2824.875mil|Location2.Y=2836.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.375mil|Location2.X=2545.625mil|Location1.Y=2824.875mil|Location2.Y=2836.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.025mm &lt; 0.254mm) Between Pad R2-1(63.881mm,71.247mm) on Top Layer And Track (64.516mm,71.958mm)(64.516mm,72.822mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.025mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2538.875mil|Location2.X=2550.125mil|Location1.Y=2774.375mil|Location2.Y=2785.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2538.875mil|Location2.X=2550.125mil|Location1.Y=2774.375mil|Location2.Y=2785.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.102mm &lt; 0.254mm) Between Pad R2-1(63.881mm,71.247mm) on Top Layer And Track (64.745mm,70.434mm)(64.745mm,74.32mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.102mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2480.375mil|Location2.X=2491.625mil|Location1.Y=2914.375mil|Location2.Y=2925.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2480.375mil|Location2.X=2491.625mil|Location1.Y=2914.375mil|Location2.Y=2925.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.254mm) Between Pad R2-2(63.881mm,73.533mm) on Top Layer And Track (63.043mm,70.434mm)(63.043mm,74.32mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2481.875mil|Location2.X=2493.125mil|Location1.Y=2916.125mil|Location2.Y=2927.375mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2481.875mil|Location2.X=2493.125mil|Location1.Y=2916.125mil|Location2.Y=2927.375mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.089mm &lt; 0.254mm) Between Pad R2-2(63.881mm,73.533mm) on Top Layer And Track (63.043mm,74.32mm)(64.745mm,74.32mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.089mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2484.375mil|Location2.X=2495.625mil|Location1.Y=2863.875mil|Location2.Y=2875.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2484.375mil|Location2.X=2495.625mil|Location1.Y=2863.875mil|Location2.Y=2875.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.025mm &lt; 0.254mm) Between Pad R2-2(63.881mm,73.533mm) on Top Layer And Track (63.246mm,71.958mm)(63.246mm,72.822mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.025mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2536.265mil|Location2.X=2547.756mil|Location1.Y=2863.643mil|Location2.Y=2874.893mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2536.265mil|Location2.X=2547.756mil|Location1.Y=2863.643mil|Location2.Y=2874.893mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.048mm &lt; 0.254mm) Between Pad R2-2(63.881mm,73.533mm) on Top Layer And Track (64.516mm,71.958mm)(64.516mm,72.822mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.048mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2538.875mil|Location2.X=2550.125mil|Location1.Y=2864.375mil|Location2.Y=2875.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2538.875mil|Location2.X=2550.125mil|Location1.Y=2864.375mil|Location2.Y=2875.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.102mm &lt; 0.254mm) Between Pad R2-2(63.881mm,73.533mm) on Top Layer And Track (64.745mm,70.434mm)(64.745mm,74.32mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.102mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2616.428mil|Location2.X=2627.678mil|Location1.Y=3356.375mil|Location2.Y=3367.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2616.428mil|Location2.X=2627.678mil|Location1.Y=3356.375mil|Location2.Y=3367.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.251mm &lt; 0.254mm) Between Pad SW6-1(65.659mm,85.395mm) on Multi-Layer And Track (66.802mm,85.395mm)(70.739mm,85.395mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.251mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2787.178mil|Location2.X=2798.428mil|Location1.Y=3156.139mil|Location2.Y=3167.389mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2787.178mil|Location2.X=2798.428mil|Location1.Y=3156.139mil|Location2.Y=3167.389mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.244mm &lt; 0.254mm) Between Pad SW6-2(72.009mm,80.315mm) on Multi-Layer And Track (66.827mm,80.315mm)(70.739mm,80.315mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.244mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2814.413mil|Location2.X=2825.663mil|Location1.Y=3141.369mil|Location2.Y=3152.619mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2814.413mil|Location2.X=2825.663mil|Location1.Y=3141.369mil|Location2.Y=3152.619mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.023mm &lt; 0.254mm) Between Pad SW6-2(72.009mm,80.315mm) on Multi-Layer And Track (71.73mm,79.934mm)(71.755mm,79.959mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.023mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2787.178mil|Location2.X=2798.428mil|Location1.Y=3356.139mil|Location2.Y=3367.389mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2787.178mil|Location2.X=2798.428mil|Location1.Y=3356.139mil|Location2.Y=3367.389mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.244mm &lt; 0.254mm) Between Pad SW6-3(72.009mm,85.395mm) on Multi-Layer And Track (66.802mm,85.395mm)(70.739mm,85.395mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.244mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2619.088mil|Location2.X=2630.338mil|Location1.Y=3156.375mil|Location2.Y=3167.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2619.088mil|Location2.X=2630.338mil|Location1.Y=3156.375mil|Location2.Y=3167.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.167mm &lt; 0.254mm) Between Pad SW6-4(65.659mm,80.315mm) on Multi-Layer And Track (66.827mm,80.315mm)(70.739mm,80.315mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4176.383mil|Location2.X=4187.633mil|Location1.Y=2905.241mil|Location2.Y=2916.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4176.383mil|Location2.X=4187.633mil|Location1.Y=2905.241mil|Location2.Y=2916.491mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad U5-1(104.923mm,74.436mm) on Top Layer And Track (106.423mm,68.786mm)(106.423mm,75.486mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4176.383mil|Location2.X=4187.633mil|Location1.Y=2814.69mil|Location2.Y=2825.94mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4176.383mil|Location2.X=4187.633mil|Location1.Y=2814.69mil|Location2.Y=2825.94mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad U5-2(104.923mm,72.136mm) on Top Layer And Track (106.423mm,68.786mm)(106.423mm,75.486mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4176.383mil|Location2.X=4187.633mil|Location1.Y=2724.139mil|Location2.Y=2735.389mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4176.383mil|Location2.X=4187.633mil|Location1.Y=2724.139mil|Location2.Y=2735.389mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad U5-3(104.923mm,69.836mm) on Top Layer And Track (106.423mm,68.786mm)(106.423mm,75.486mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4302.367mil|Location2.X=4313.617mil|Location1.Y=2899.336mil|Location2.Y=2910.586mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Admin_PC\OneDrive\Desktop\Board4\Board4_quangnguyen.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4302.367mil|Location2.X=4313.617mil|Location1.Y=2899.336mil|Location2.Y=2910.586mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad U5-4(110.723mm,72.136mm) on Top Layer And Track (109.223mm,68.786mm)(109.223mm,75.486mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
