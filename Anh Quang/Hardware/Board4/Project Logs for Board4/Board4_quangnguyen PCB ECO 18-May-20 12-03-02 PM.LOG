@@ -1,4 +1,0 @@
-Added Component: Designator=BT(SW-GAT)
-Add component. Clean all parameters for all variants
-Add component (AddParameter): Name = "Value"; Value = "PIN 9V"; VariantName = "[No Variations]"
-Added Member To Class: ClassName=BOARD4_quangnguyen Member=Component BT PIN 9V
