@@ -1,3 +1,5 @@
+- [ ] Structure of message send and receiver
+- [ ] Assert message send and receive
 - [ ] Read from all sensors
 - [ ] Use all peripheral devices
 - [ ] Seperate code to be more abstract
