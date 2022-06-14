@@ -1,7 +1,7 @@
 #include <MHZ19PWM.h>
 
 
-MHZ19PWM mhz(2, MHZ_DELAYED_MODE);
+MHZ19PWM mhz(2, MHZ_CONTINUOUS_MODE);
 
 void setup()
 {
@@ -31,4 +31,3 @@ void loop()
   showValue();
   delay(5000);
 }
-
