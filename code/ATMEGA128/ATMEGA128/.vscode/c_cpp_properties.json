@@ -1,0 +1,66 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "e:/3.IPAC_LAB/2022_2/smart-building/code/ATMEGA128/ATMEGA128/include",
+                "e:/3.IPAC_LAB/2022_2/smart-building/code/ATMEGA128/ATMEGA128/src",
+                "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/libraries/SoftwareSerial/src",
+                "e:/3.IPAC_LAB/2022_2/smart-building/code/ATMEGA128/ATMEGA128/.pio/libdeps/ATmega128/MH-Z19/src",
+                "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/cores/MegaCore",
+                "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/variants/64-pin-avr",
+                "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/libraries/AVR_examples/src",
+                "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/libraries/EEPROM/src",
+                "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/libraries/Optiboot_flasher/src",
+                "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/libraries/SD/src",
+                "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/libraries/SPI/src",
+                "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/libraries/Servo/src",
+                "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/libraries/Timer/src",
+                "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/libraries/Wire/src",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "e:/3.IPAC_LAB/2022_2/smart-building/code/ATMEGA128/ATMEGA128/include",
+                    "e:/3.IPAC_LAB/2022_2/smart-building/code/ATMEGA128/ATMEGA128/src",
+                    "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/libraries/SoftwareSerial/src",
+                    "e:/3.IPAC_LAB/2022_2/smart-building/code/ATMEGA128/ATMEGA128/.pio/libdeps/ATmega128/MH-Z19/src",
+                    "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/cores/MegaCore",
+                    "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/variants/64-pin-avr",
+                    "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/libraries/AVR_examples/src",
+                    "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/libraries/EEPROM/src",
+                    "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/libraries/Optiboot_flasher/src",
+                    "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/libraries/SD/src",
+                    "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/libraries/SPI/src",
+                    "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/libraries/Servo/src",
+                    "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/libraries/Timer/src",
+                    "C:/Users/haimd/.platformio/packages/framework-arduino-avr-megacore/libraries/Wire/src",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=60002",
+                "ARDUINO_AVR_ATmega128",
+                "F_CPU=16000000L",
+                "ARDUINO_ARCH_AVR",
+                "ARDUINO=10808",
+                "__AVR_ATmega128__",
+                ""
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "compilerPath": "C:/Users/haimd/.platformio/packages/toolchain-atmelavr/bin/avr-gcc.exe",
+            "compilerArgs": [
+                "-mmcu=atmega128",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}
