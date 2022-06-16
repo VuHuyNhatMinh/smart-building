@@ -92,9 +92,10 @@ void loop()
 {
   // Reconnecting to MQTT server
   if (!client.connected()) {
-    reconnect();
+    reconnect(); 
   }
   client.loop();
+
 
   delay(200);
 
