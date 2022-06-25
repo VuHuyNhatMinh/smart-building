@@ -9,7 +9,7 @@
 //const char* ssid = "MINHCHAU_2.4";
 //const char* password = "ETHANhunt(-)123";
 
-const char* ssid = "Nha Tro 21B_T2";
+const char* ssid = "Nha Tro 21B_T3";
 const char* password = "dotienhai";
 
 const char* mqtt_server = "broker.mqttdashboard.com";
@@ -96,9 +96,6 @@ void loop()
   }
   client.loop();
 
-
-  delay(200);
-
   /* Publishing a message to MQTT server */
   digitalWrite(2, HIGH);
 
@@ -109,27 +106,29 @@ void loop()
   {
     //     Allocate the JSON document
     //     This one must be bigger than for the sender because it must store the strings
-    StaticJsonDocument<300> doc;
+    StaticJsonDocument<500> doc;
 
     // Read the JSON document from the "link" serial port
     DeserializationError err = deserializeJson(doc, UART2);
+    char msg[300];
+    serializeJson(doc, msg);
+    client.publish(topic, msg);
+    Serial.println(msg);
 
     if (err == DeserializationError::Ok)
     {
       // Print the values
       // (we must use as<T>() to resolve the ambiguity)
-      char msg[300];
-      serializeJson(doc, msg);
-      Serial.println(msg);
-      client.publish(topic, msg);
-
+      // char msg[300];
+      // serializeJson(doc, msg);    
+      // client.publish(topic, msg);
     }
     else
     {
       // Print error to the "debug" serial port
-      Serial.print("deserializeJson() returned ");
-      Serial.println(err.c_str());
-
+      // Serial.print("deserializeJson() returned ");
+      // Serial.println(err.c_str());
+      // client.publish(topic, err.c_str());
       // Flush all bytes in the "link" serial port buffer
       while (UART2.available() > 0)
         UART2.read();

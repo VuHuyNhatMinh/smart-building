@@ -5,6 +5,7 @@
 #include <ArduinoJson.h>
 #include <string.h>
 #include <SPI.h>
+#include <math.h>
 
 #include "RTClib.h" //DS3231 library
 RTC_DS3231 rtc;
@@ -134,10 +135,10 @@ void Send_Data(void *context)
   DateTime time = rtc.now();
   Time_Stamp = time.timestamp(DateTime::TIMESTAMP_FULL);
 
-  if (motiontime/totalread >= 0.5) // nếu trong 1p có 50% lần đọc chuyển động thì báo là có chuyển động
-    motion = true;
+  if (motiontime/totalread >= 0.5) 
+    {motion = true;}
   else
-    motion = false;
+    {motion = false;}
     
     motiontime = 0;
     totalread = 0;
@@ -154,7 +155,6 @@ void Send_Data(void *context)
     doc["CO2"] = CO2;
     doc["DUST"] = dust;
     doc["TVOC"] = TVOC;
-    doc["CO2_GAS"] = CO2_gas;
     doc["MOTION"] = motion;
     doc["SOUND"] = sound;
     doc["TEMPERATURE"] = temp;
@@ -188,13 +188,12 @@ void setup(){
   }
 
   if (rtc.lostPower()) {
-    // Serial.println("RTC is NOT running, let's set the time!");
     // When time needs to be set on a new device, or after a power loss, the
     // following line sets the RTC to the date & time this sketch was compiled
     // rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
     // This line sets the RTC with an explicit date & time, for example to set
     // 2022-06-25T17:07:00 you would call:
-    // rtc.adjust(DateTime(2022, 6, 25, 17, 7, 0));
+    rtc.adjust(DateTime(2022, 6, 26, 1, 10, 0));
   }
 
 /************************************SETUP_TCS34725_RGB*****************************/
@@ -211,15 +210,15 @@ void setup(){
   ccs.begin();
 
 /************************************SETUP_TIMERLOOP********************************/
-  int Send_Data_event = t.every(120000, Send_Data, (void*) 0);  // t.every(msforloop, function called, (void*)0)
-  int Read_Co2_event = t.every(30000, Read_Co2, (void*) 0);
-  int Read_temp_humid_event = t.every(120000, Read_temp_humid, (void*) 0);
-  int Read_RGB_event = t.every(30000, Read_RGB, (void*) 0);
-  int Read_Light_event = t.every(30000, Read_Light, (void*) 0);
-  int Read_Gas_event = t.every(30000, Read_Gas, (void*) 0);
-  int Motion_event = t.every(1000, Motion, (void*) 0);
-  int Read_Sound_event = t.every(30000, Read_Sound, (void*) 0);
-  int Read_Dust_event = t.every(120000, Read_Dust, (void*) 0);
+  t.every(120000, Send_Data, (void*) 0);  // t.every(msforloop, function called, (void*)0)
+  t.every(30000, Read_Co2, (void*) 0);
+  t.every(120000, Read_temp_humid, (void*) 0);
+  t.every(30000, Read_RGB, (void*) 0);
+  t.every(30000, Read_Light, (void*) 0);
+  t.every(30000, Read_Gas, (void*) 0);
+  t.every(1000, Motion, (void*) 0);
+  t.every(30000, Read_Sound, (void*) 0);
+  t.every(120000, Read_Dust, (void*) 0);
 }
 
 void loop(){
