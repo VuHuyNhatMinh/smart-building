@@ -1,7 +1,7 @@
 - [x] Structure of message send and receiver 
 - [ ] Assert message send and receive
-- [ ] Read from all sensors (CSS18)
-- [ ] Use all peripheral devices (SD Card, LCD, EEPROM)
+- [ ] lack of CSS18
+- [ ] Use all peripheral devices (SD Card, OLED, EEPROM)
 - [ ] Seperate code to be more abstract
 - [ ] Add loging file function
 - [ ] Test others boards
