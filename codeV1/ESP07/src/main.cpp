@@ -22,7 +22,7 @@ PubSubClient client(espClient);
 
 #define topic "year3"
 
-SoftwareSerial UART2(13, 15); // khai bao uart2 cua esp
+SoftwareSerial UART2(13, 15); //  uart2 comuinicates with atmega128P
 
 void setup_wifi()
 {
@@ -101,34 +101,28 @@ void loop()
 
   /* nhan du lieu tu uart */
   /* Finishing publish */
-
   if (UART2.available())
-  {
-    //     Allocate the JSON document
-    //     This one must be bigger than for the sender because it must store the strings
-    StaticJsonDocument<500> doc;
-
+  { 
+    //  Allocate the JSON document
+    //  This one must be bigger than for the sender because it must store the strings
+    // size is suggested by https://arduinojson.org/v6/assistant/#/step1
+    StaticJsonDocument<512> doc;
     // Read the JSON document from the "link" serial port
-    DeserializationError err = deserializeJson(doc, UART2);
-    char msg[300];
-    serializeJson(doc, msg);
-    client.publish(topic, msg);
-    Serial.println(msg);
+    DeserializationError err = deserializeJson(doc, UART2.readString());
 
     if (err == DeserializationError::Ok)
     {
       // Print the values
       // (we must use as<T>() to resolve the ambiguity)
-      // char msg[300];
-      // serializeJson(doc, msg);    
-      // client.publish(topic, msg);
+      char msg[400];
+      serializeJson(doc, msg);    
+      client.publish(topic, msg);
     }
     else
     {
       // Print error to the "debug" serial port
-      // Serial.print("deserializeJson() returned ");
-      // Serial.println(err.c_str());
-      // client.publish(topic, err.c_str());
+      Serial.print("deserializeJson() returned ");
+      Serial.println(err.c_str());
       // Flush all bytes in the "link" serial port buffer
       while (UART2.available() > 0)
         UART2.read();

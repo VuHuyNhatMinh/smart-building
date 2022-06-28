@@ -37,7 +37,7 @@ Timer t;
 String Time_Stamp;
 float temp = 0, humid = 0;
 double CO2 = 0;
-uint16_t r = 0, g = 0, b = 0, c = 0, colorTemp = 0, lux = 0;
+uint16_t r = 0, g = 0, b = 0, c = 0;
 float light = 0;
 bool motion = 0; float motiontime = 0, totalread = 0;
 int sound = 0;
@@ -64,15 +64,12 @@ void Read_temp_humid(void *context){
   else
   {
     Serial.print("\tNot connected:\t");
-    // sht.reset();
+    sht.reset();
   }
 }
 
 void Read_RGB(void *context){
   tcs.getRawData(&r, &g, &b, &c);
-  // colorTemp = tcs.calculateColorTemperature(r, g, b);
-  colorTemp = tcs.calculateColorTemperature_dn40(r, g, b, c);
-  lux = tcs.calculateLux(r, g, b);
 }
 
 void Read_Light(void *context){
@@ -82,15 +79,10 @@ void Read_Light(void *context){
 void Read_Gas(void *context){
   if(ccs.available()){
     if(!ccs.readData()){
-      // Serial.print("CO2: ");
-      CO2_gas = Serial.print(ccs.geteCO2());
-      // Serial.print("ppm, TVOC: ");
-      // Serial.println(ccs.getTVOC());
       TVOC = ccs.getTVOC();
     }
     else{
-      // Serial.println("ERROR!");
-      // while(1);
+      Serial.println("ERROR CCS811!");
     }
   }
 }
@@ -104,7 +96,7 @@ void Motion(void *context) {
 
 void Read_Sound(void *context)
 {
-  sound = analogRead(PIN_PF0);// max Pin is PF0
+  sound = analogRead(PIN_PF0);// MAX9814 Pin is PF0
 }
 
 void Read_Dust(void *context) {   
@@ -144,13 +136,10 @@ void Send_Data(void *context)
     totalread = 0;
 
   StaticJsonDocument<500> doc;
-    doc["Time"] = Time_Stamp;
+    doc["TIME"] = Time_Stamp;
     doc["REG"] = r;
     doc["GREEN"] = g;
     doc["BLUE"] = b;
-    doc["COLOR"] = c;
-    doc["COLOR_TEMP"] = colorTemp;
-    doc["LUX"] = lux;
     doc["LIGHT"] = light;
     doc["CO2"] = CO2;
     doc["DUST"] = dust;
@@ -210,7 +199,7 @@ void setup(){
   ccs.begin();
 
 /************************************SETUP_TIMERLOOP********************************/
-  t.every(120000, Send_Data, (void*) 0);  // t.every(msforloop, function called, (void*)0)
+  t.every(30000, Send_Data, (void*) 0);  // t.every(msforloop, function called, (void*)0)
   t.every(30000, Read_Co2, (void*) 0);
   t.every(120000, Read_temp_humid, (void*) 0);
   t.every(30000, Read_RGB, (void*) 0);
@@ -224,4 +213,3 @@ void setup(){
 void loop(){
   t.update();
 }
-
